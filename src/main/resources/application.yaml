@@ -1,0 +1,11 @@
+spring:
+  jwt:
+    secret: ${secret}
+  application:
+    name: store
+  datasource:
+    url: jdbc:postgresql://localhost:5432/store_api
+    username: postgres
+    password: admin
+  jpa:
+    show-sql: true
