@@ -31,4 +31,8 @@ public class CartItem {
     public BigDecimal getTotalPrice() {
         return product.getPrice().multiply(new BigDecimal(quantity));
     }
+
+    public BigDecimal getUnitPrice() {
+        return product.getPrice();
+    }
 }

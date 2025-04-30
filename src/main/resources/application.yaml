@@ -1,6 +1,8 @@
 spring:
   jwt:
-    secret: ${secret}
+    secret: ${JWT_SECRET}
+    accessTokenExpiration: 7200 # 5 min
+    refreshTokenExpiration: 604800 # 7 Days
   application:
     name: store
   datasource:
@@ -9,3 +11,6 @@ spring:
     password: admin
   jpa:
     show-sql: true
+stripe:
+  secret: ${STRIPE_SECRET}
+websiteUrl: http://localhost:8080

@@ -1,9 +1,11 @@
 package com.codewithmosh.store.controllers;
 
+import com.codewithmosh.store.dtos.ErrorDto;
 import com.codewithmosh.store.dtos.user.ChangePasswordRequest;
 import com.codewithmosh.store.dtos.user.RegisterUserRequest;
 import com.codewithmosh.store.dtos.user.UpdateUserRequest;
 import com.codewithmosh.store.dtos.user.UserDto;
+import com.codewithmosh.store.entities.Role;
 import com.codewithmosh.store.mappers.UserMapper;
 import com.codewithmosh.store.repositories.UserRepository;
 import jakarta.validation.Valid;
@@ -46,10 +48,11 @@ public class UserController {
     @PostMapping
     public ResponseEntity<?> registerUser(@Valid @RequestBody RegisterUserRequest request, UriComponentsBuilder uriBuilder) {
         if(userRepository.existsUserByEmail(request.getEmail()))
-            return ResponseEntity.badRequest().body(Map.of("email", "email already in use"));
+            return ResponseEntity.badRequest().body(new ErrorDto("Email already in use"));
 
         var user = userMapper.toEntity(request);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRole(Role.USER);
         userRepository.save(user);
         var userDto = userMapper.toDto(user);
         var uri = uriBuilder.path("/users/{id}").buildAndExpand(userDto.getId()).toUri();
