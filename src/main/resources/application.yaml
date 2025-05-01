@@ -1,7 +1,7 @@
 spring:
   jwt:
     secret: ${JWT_SECRET}
-    accessTokenExpiration: 7200 # 5 min
+    accessTokenExpiration: 900 # 15 min
     refreshTokenExpiration: 604800 # 7 Days
   application:
     name: store
@@ -13,4 +13,5 @@ spring:
     show-sql: true
 stripe:
   secret: ${STRIPE_SECRET}
+  webhookSecretKey: ${STRIPE_WEBHOOK_SECRET}
 websiteUrl: http://localhost:8080
