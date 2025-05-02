@@ -1,6 +1,10 @@
 spring:
   application:
     name: store
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
   jwt:
     secret: ${JWT_SECRET}
     accessTokenExpiration: 900 # 15 min
